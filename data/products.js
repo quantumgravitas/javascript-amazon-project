@@ -656,5 +656,37 @@ const products = [
       "apparel",
       "mens"
     ]
+  },
+  {
+    id: "id1",
+    image:"images/products/backpack.jpg",
+    name: "Puma best WildBackPack",
+    rating: {
+      stars: 4.5,
+      count: 100
+    },
+    priceCents: 9000,
+    keywords: [
+      "backPak",
+      "School Bag",
+      "Puma Bag"
+  
+    ]
+  },
+  {
+    id: "id2",
+    image:"images/products/umbrella.jpg",
+    name: "Blue Umbrella",
+    rating: {
+      stars: 5,
+      count: 100
+    },
+    priceCents: 8000,
+    keywords: [
+      "backPak",
+      "School Bag",
+      "Puma Bag"
+  
+    ]
   }
 ];
