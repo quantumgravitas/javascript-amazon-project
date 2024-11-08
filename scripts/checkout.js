@@ -101,5 +101,6 @@ document.querySelectorAll('.js-delete-quantity-link').forEach((link)=>{
      removeFromCart(productId);
       const container= document.querySelector(`.js-cart-item-container-${productId}`);
        container.remove();
+
   })
 })
