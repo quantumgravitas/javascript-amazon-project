@@ -1,7 +1,6 @@
 import {cart,removeFromCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 import { currencyFormat } from './utils/money.js';
-
 let cartSummaryHTML='';
 cart.forEach((cartItem)=>{
   const productId=cartItem.productId;
@@ -104,3 +103,9 @@ document.querySelectorAll('.js-delete-quantity-link').forEach((link)=>{
 
   })
 })
+
+let cartQuantity=0;
+cart.forEach((item)=>{
+cartQuantity+=item.quantity;
+})
+document.querySelector('.js-return-to-home-link').innerHTML=`${cartQuantity} items`;
