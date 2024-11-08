@@ -98,14 +98,20 @@ document.querySelectorAll('.js-delete-quantity-link').forEach((link)=>{
      const{productId}=link.dataset ;
 
      removeFromCart(productId);
-      const container= document.querySelector(`.js-cart-item-container-${productId}`);
+       const container= document.querySelector(`.js-cart-item-container-${productId}`);
        container.remove();
-
+       document.querySelector('.js-return-to-home-link').innerHTML=`${updateCartQuantity()} items`;
   })
 })
 
-let cartQuantity=0;
-cart.forEach((item)=>{
-cartQuantity+=item.quantity;
-})
-document.querySelector('.js-return-to-home-link').innerHTML=`${cartQuantity} items`;
+
+function updateCartQuantity()
+{
+  let cartQuantity=0;
+  cart.forEach((item)=>{
+  cartQuantity+=item.quantity;
+  })
+  return cartQuantity;
+}
+
+document.querySelector('.js-return-to-home-link').innerHTML=`${updateCartQuantity()} items`;
