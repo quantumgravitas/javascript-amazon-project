@@ -3,7 +3,7 @@ import {products,getProduct} from '../../data/products.js';
 import {currencyFormat} from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import {deliveryOptions,getDeliveryOption} from '../../data/deliveryoptions.js';
-
+import {renderPaymentSummary} from './paymentSummary.js';
 //default export -when we only want to export only one thing
 //importing the esm versions of the libraries so that we can use variables of same names in different files
 
@@ -112,6 +112,7 @@ function deliveryOptionsHTML(matchingProduct,cartItem)
               const container= document.querySelector(`.js-cart-item-container-${productId}`);
               container.remove();
               document.querySelector('.js-return-to-home-link').innerHTML=`${calculateCartQuantity()} items`;
+              renderPaymentSummary();
         })
     })
 
@@ -142,6 +143,7 @@ function deliveryOptionsHTML(matchingProduct,cartItem)
         }
         const container=document.querySelector(`.js-cart-item-container-${productId}`);
         container.classList.remove("is-editing-quantity");
+        renderPaymentSummary();
     }
 
     document.querySelectorAll('.js-delivery-option').forEach((element)=>{
@@ -149,6 +151,7 @@ function deliveryOptionsHTML(matchingProduct,cartItem)
         const {productId,deliveryOptionId}=element.dataset;
         updateDeliveryOption(productId,deliveryOptionId);
         renderOrderSummary();
+        renderPaymentSummary();
       })
     })
 }
