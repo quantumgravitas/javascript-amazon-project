@@ -111,7 +111,8 @@ function deliveryOptionsHTML(matchingProduct,cartItem)
               removeFromCart(productId);
               const container= document.querySelector(`.js-cart-item-container-${productId}`);
               container.remove();
-              document.querySelector('.js-return-to-home-link').innerHTML=`${calculateCartQuantity()} items`;
+              renderOrderSummary();
+              //document.querySelector('.js-return-to-home-link').innerHTML=`${calculateCartQuantity()} items`;
               renderPaymentSummary();
         })
     })
