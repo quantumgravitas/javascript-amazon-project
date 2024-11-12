@@ -2,7 +2,7 @@ import {cart,removeFromCart,updateDeliveryOption,updateQuantity,calculateCartQua
 import {products,getProduct} from '../../data/products.js';
 import {currencyFormat} from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import {deliveryOptions,getDeliveryOption} from '../../data/deliveryoptions.js';
+import {deliveryOptions,getDeliveryOption,calculateDeliveryDate} from '../../data/deliveryoptions.js';
 import {renderPaymentSummary} from './paymentSummary.js';
 import { renderCheckoutHeader } from './checkoutHeader.js';
 //default export -when we only want to export only one thing
@@ -19,12 +19,11 @@ import { renderCheckoutHeader } from './checkoutHeader.js';
       const matchingProduct=getProduct(productId);
 
       const deliveryOptionId=cartItem.deliveryOptionId;
-       const deliveryOption=getDeliveryOption(deliveryOptionId);
 
-  const today=dayjs();
-  
-  const deliveryDate=today.add(deliveryOption.deliveryDays, 'days');
-  const dateString=deliveryDate.format('dddd, MMMM D');
+      const deliveryOption=getDeliveryOption(deliveryOptionId);
+
+      const dateString=calculateDeliveryDate(deliveryOption);
+ 
     cartSummaryHTML+= 
    ` <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
       <div class="delivery-date">
@@ -76,9 +75,7 @@ function deliveryOptionsHTML(matchingProduct,cartItem)
         let html='';
         deliveryOptions.forEach((deliveryOption)=>{
           
-            const today=dayjs();
-            const deliveryDate=today.add(deliveryOption.deliveryDays,'days');
-            const dateString=deliveryDate.format('dddd, MMMM D');
+            const dateString=calculateDeliveryDate(deliveryOption);
             const priceString= deliveryOption.priceCents===0 ? 'FREE' : `$${currencyFormat(deliveryOption.priceCents)}-`  ;
             const ischecked=  deliveryOption.id === cartItem.deliveryOptionId ;
             
@@ -139,9 +136,10 @@ function deliveryOptionsHTML(matchingProduct,cartItem)
         const newQuantity= Number(document.querySelector(`.js-quantity-input-${productId}`).value);
         if(newQuantity>0 && newQuantity<=1000)
         {
-            document.querySelector(`.js-quantity-label-${productId}`).innerHTML=newQuantity ;
+            //document.querySelector(`.js-quantity-label-${productId}`).innerHTML=newQuantity ;
             updateQuantity(productId,newQuantity);
             renderCheckoutHeader();
+            renderOrderSummary();
         }
         const container=document.querySelector(`.js-cart-item-container-${productId}`);
         container.classList.remove("is-editing-quantity");
