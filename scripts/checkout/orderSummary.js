@@ -4,6 +4,7 @@ import {currencyFormat} from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import {deliveryOptions,getDeliveryOption} from '../../data/deliveryoptions.js';
 import {renderPaymentSummary} from './paymentSummary.js';
+import { renderCheckoutHeader } from './checkoutHeader.js';
 //default export -when we only want to export only one thing
 //importing the esm versions of the libraries so that we can use variables of same names in different files
 
@@ -117,7 +118,7 @@ function deliveryOptionsHTML(matchingProduct,cartItem)
         })
     })
 
-    document.querySelector('.js-return-to-home-link').innerHTML=`${calculateCartQuantity()} items`;
+    renderCheckoutHeader();
 
     document.querySelectorAll('.js-update-quantity-link').forEach((link)=>{
           link.addEventListener('click',()=>{
@@ -140,7 +141,7 @@ function deliveryOptionsHTML(matchingProduct,cartItem)
         {
             document.querySelector(`.js-quantity-label-${productId}`).innerHTML=newQuantity ;
             updateQuantity(productId,newQuantity);
-            document.querySelector('.js-return-to-home-link').innerHTML=`${calculateCartQuantity()} items`;
+            renderCheckoutHeader();
         }
         const container=document.querySelector(`.js-cart-item-container-${productId}`);
         container.classList.remove("is-editing-quantity");
