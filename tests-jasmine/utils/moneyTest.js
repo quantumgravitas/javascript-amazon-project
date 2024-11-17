@@ -16,4 +16,8 @@ describe('Test Suite: Format Currency',()=>{
   it('Rounds up to the nearest Cents less than 5',()=>{
     expect(currencyFormat(2000.4)).toEqual('20.00');
   });
+
+  it('Checking for negative cents',()=>{
+    expect(currencyFormat(-2300)).toEqual('-23.00');
+  })
 })
