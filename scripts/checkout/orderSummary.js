@@ -80,11 +80,11 @@ function deliveryOptionsHTML(matchingProduct,cartItem)
             const priceString= deliveryOption.priceCents===0 ? 'FREE' : `$${currencyFormat(deliveryOption.priceCents)}-`  ;
             const ischecked=  deliveryOption.id === cartItem.deliveryOptionId ;
             
-          html+=  `<div class="delivery-option  js-delivery-option"
+          html+=  `<div class="delivery-option  js-delivery-option  js-delivery-option-${matchingProduct.id}-${deliveryOption.id}"
                     data-product-id="${matchingProduct.id}"
                     data-delivery-option-id="${deliveryOption.id}" >
                     <input type="radio" ${ischecked ? 'checked' : ''} 
-                      class="delivery-option-input"
+                      class="delivery-option-input js-delivery-option-input-${matchingProduct.id}-${deliveryOption.id}"
                       name="delivery-option-${matchingProduct.id}">
 
                     <div>
