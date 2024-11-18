@@ -1,5 +1,9 @@
 // export  let cart=JSON.parse(localStorage.getItem('cart'));
 
+import { checkValidDeliveryOption} from "./deliveryoptions.js";
+
+
+
 // if(!cart)
 // {
 //   cart=[
@@ -227,8 +231,14 @@ export function updateQuantity(productId, newQuantity) {
 // Update the delivery option for a specific product in the cart
 export function updateDeliveryOption(productId, deliveryOptionId) {
   const matchingCartItem = cart.find(cartItem => cartItem.productId === productId);
-  if (matchingCartItem) {
+  if (!matchingCartItem) {
+    return ;
+  }
+  if(!checkValidDeliveryOption(deliveryOptionId))
+   {
+    return ;
+   }
     matchingCartItem.deliveryOptionId = deliveryOptionId;
     saveToStorage();
-  }
 }
+     
