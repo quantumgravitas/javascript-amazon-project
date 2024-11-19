@@ -1,10 +1,11 @@
 import {cart,removeFromCart,updateDeliveryOption,updateQuantity,calculateCartQuantity} from '../../data/cart.js';
-import {products,getProduct} from '../../data/products.js';
+import { getProduct } from '../../data/products.js';
 import {currencyFormat} from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import {deliveryOptions,getDeliveryOption,calculateDeliveryDate} from '../../data/deliveryoptions.js';
 import {renderPaymentSummary} from './paymentSummary.js';
 import { renderCheckoutHeader } from './checkoutHeader.js';
+
 //default export -when we only want to export only one thing
 //importing the esm versions of the libraries so that we can use variables of same names in different files
 
@@ -40,7 +41,7 @@ import { renderCheckoutHeader } from './checkoutHeader.js';
             ${matchingProduct.name}
           </div>
           <div class="product-price js-product-price-${matchingProduct.id}">
-            $${currencyFormat(matchingProduct.priceCents)}
+            ${matchingProduct.getPriceCents()}
           </div>
           <div class="product-quantity  js-product-quantity-${matchingProduct.id}">
             <span>

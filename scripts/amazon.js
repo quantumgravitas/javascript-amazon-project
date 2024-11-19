@@ -15,14 +15,14 @@ productsHTML+=`
 
   <div class="product-rating-container">
     <img class="product-rating-stars"
-    src="images/ratings/rating-${product.rating.stars*10}.png">
+    src="${product.getStrarsUrl()}">
     <div class="product-rating-count link-primary">
        ${product.rating.count}
     </div>
   </div>
 
   <div class="product-price">
-     $${currencyFormat(product.priceCents)}
+     ${product.getPriceCents()}
   </div>
 
   <div class="product-quantity-container js-product-quantity-container">
@@ -62,10 +62,10 @@ document.querySelector('.js-products-grid').innerHTML= productsHTML;
 }
 
   document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
-  button.addEventListener('click',()=>{
-  const {productId}=button.dataset;
-  addToCart(productId);
-  updateCartQuantity();
+    button.addEventListener('click',()=>{
+    const {productId}=button.dataset;
+    addToCart(productId);
+    updateCartQuantity();
      })
   })
 
