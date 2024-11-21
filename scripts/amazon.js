@@ -15,7 +15,7 @@ productsHTML+=`
 
   <div class="product-rating-container">
     <img class="product-rating-stars"
-    src="${product.getStrarsUrl()}">
+    src="${product.getStarsUrl()}">
     <div class="product-rating-count link-primary">
        ${product.rating.count}
     </div>

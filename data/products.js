@@ -11,7 +11,7 @@
   return matchingProduct;
  }
  
- class Product
+ export class Product
  {
    id;
    image;
@@ -28,7 +28,7 @@
      this.priceCents=productDetails.priceCents;
    }
    
-   getStrarsUrl()
+   getStarsUrl()
    {
      return `images/ratings/rating-${this.rating.stars*10}.png` ;
    }
@@ -45,7 +45,7 @@
  }
  
 
- class Clothing extends Product
+ export class Clothing extends Product
  { 
    sizeChartLink; 
    
@@ -61,7 +61,7 @@
    }
  }
 
- class Appliance extends Product
+ export class Appliance extends Product
  {
    instructionsLink;
    warrantyLink;
