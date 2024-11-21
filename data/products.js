@@ -60,6 +60,42 @@
       return `<a href="${this.sizeChartLink}" target="_blank">sizeChartLink</a>` ;
    }
  }
+
+/*console.log(this);
+const object2= {
+  a:2,
+  b:4
+}
+object2.b=6 ;
+console.log(object2);
+*/
+/*
+function logThis()
+{
+  console.log(this);
+}
+logThis.call('hello');
+
+
+const object3={
+  method:()=>{
+    console.log(this);
+  }
+}
+object3.method();
+*/
+/*
+const object3={
+ method()
+ {
+  console.log(this);
+  [1,2,3].forEach(()=>{
+    console.log(this);
+  })
+ }
+}  
+ object3.method();
+ */
  export const products = [
     
   {
@@ -759,3 +795,4 @@
    }
    return new Product(productDetails);
 });
+
