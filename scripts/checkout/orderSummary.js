@@ -8,7 +8,6 @@ import { renderCheckoutHeader } from './checkoutHeader.js';
 
 //default export -when we only want to export only one thing
 //importing the esm versions of the libraries so that we can use variables of same names in different files
-
  export function renderOrderSummary()
 {
   
@@ -112,12 +111,10 @@ function deliveryOptionsHTML(matchingProduct,cartItem)
               const container= document.querySelector(`.js-cart-item-container-${productId}`);
               container.remove();
               renderOrderSummary();
-              //document.querySelector('.js-return-to-home-link').innerHTML=`${calculateCartQuantity()} items`;
+              renderCheckoutHeader(); 
               renderPaymentSummary();
         })
     })
-
-    //renderCheckoutHeader();
 
     document.querySelectorAll('.js-update-quantity-link').forEach((link)=>{
           link.addEventListener('click',()=>{
@@ -139,8 +136,8 @@ function deliveryOptionsHTML(matchingProduct,cartItem)
         if(newQuantity>0 && newQuantity<=1000)
         {
             //document.querySelector(`.js-quantity-label-${productId}`).innerHTML=newQuantity ;
-            updateQuantity(productId,newQuantity);
             renderCheckoutHeader();
+            updateQuantity(productId,newQuantity);
             renderOrderSummary();
         }
         const container=document.querySelector(`.js-cart-item-container-${productId}`);
