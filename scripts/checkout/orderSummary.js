@@ -68,9 +68,7 @@ import { renderCheckoutHeader } from './checkoutHeader.js';
     </div>
   ` ;
 })
-
-
-
+ renderCheckoutHeader();
 function deliveryOptionsHTML(matchingProduct,cartItem)
 {   
         let html='';
@@ -100,7 +98,7 @@ function deliveryOptionsHTML(matchingProduct,cartItem)
         return html;
     }
 
-
+    
     document.querySelector('.js-order-summary').innerHTML=cartSummaryHTML;
 
     document.querySelectorAll('.js-delete-quantity-link').forEach((link)=>{
@@ -111,7 +109,6 @@ function deliveryOptionsHTML(matchingProduct,cartItem)
               const container= document.querySelector(`.js-cart-item-container-${productId}`);
               container.remove();
               renderOrderSummary();
-              renderCheckoutHeader(); 
               renderPaymentSummary();
         })
     })
@@ -135,11 +132,10 @@ function deliveryOptionsHTML(matchingProduct,cartItem)
         const newQuantity= Number(document.querySelector(`.js-quantity-input-${productId}`).value);
         if(newQuantity>0 && newQuantity<=1000)
         {
-            //document.querySelector(`.js-quantity-label-${productId}`).innerHTML=newQuantity ;
-            renderCheckoutHeader();
-            updateQuantity(productId,newQuantity);
-            renderOrderSummary();
+          updateQuantity(productId,newQuantity);
+          renderOrderSummary();
         }
+
         const container=document.querySelector(`.js-cart-item-container-${productId}`);
         container.classList.remove("is-editing-quantity");
         renderPaymentSummary();

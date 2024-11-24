@@ -7,7 +7,7 @@ import {loadProducts} from '../data/products.js';
 //import '../data/car.js';
 
 loadProducts(()=>{
-  renderCheckoutHeader();
+
   renderOrderSummary();
   renderPaymentSummary();
 })
