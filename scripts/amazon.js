@@ -78,6 +78,6 @@ function renderProductsGrid(){
     document.querySelector('.js-cart-quantity').innerHTML=calculateCartQuantity();
 }
 
-
+renderProductsGrid();
 
 
