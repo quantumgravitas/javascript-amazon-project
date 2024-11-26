@@ -7,6 +7,60 @@ import { loadCart } from "../data/cart.js";
 //import '../data/backend-practice.js';
 //import '../data/car.js';
 
+ /*async function loadPage()
+{
+  await loadProductsFetch();
+
+  new Promise((resolve)=>{
+      loadCart(()=>{
+        resolve();
+      })
+   }).then(()=>{
+       renderOrderSummary();
+       renderPaymentSummary();
+   })
+}*/
+
+ async function loadPage()
+ {
+    await loadProductsFetch();
+
+    await new Promise((resolve)=>{
+      loadCart(()=>{
+        resolve();
+      })
+    });
+    
+    renderOrderSummary();
+    renderPaymentSummary();
+ }
+ 
+loadPage();
+    
+
+
+// function loadPage()
+// {
+//   return new Promise((resolve)=>{
+//     console.log('load page');
+//     resolve();
+//   })
+// } it is similar to async function loadPage.async function is just shortcut of this regular function
+
+// function loadPage()
+// {
+//    return new Promise((resolve)=>{
+//       console.log('load page');
+//       resolve();
+//    }).then(()=>{
+//       loadProductsFetch();
+//    }).then(()=>{
+//        return new Promise((resolve)=>{
+//           resolve('value2');
+//        });
+//    });
+// }
+/*
 Promise.all([
   
   loadProductsFetch(),
@@ -20,6 +74,7 @@ Promise.all([
   renderOrderSummary();
   renderPaymentSummary();
 })
+  */
 
 /*
 new Promise((resolve)=>{
