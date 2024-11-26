@@ -1,7 +1,9 @@
  import { currencyFormat } from "../scripts/utils/money.js";
+
  export function getProduct(productId)
- {
+ {  
     let matchingProduct;
+
     products.forEach((product)=>{
       if(product.id===productId)
       {
@@ -10,7 +12,14 @@
     })
     return matchingProduct;
  }
- 
+ export async function fetchAndGetProduct(productId)
+ {
+   await loadProductsFetch();
+
+   const product=getProduct(productId);
+
+   return product ;
+ }
  export class Product
  {
    id;
