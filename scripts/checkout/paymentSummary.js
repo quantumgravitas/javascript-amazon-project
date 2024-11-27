@@ -1,8 +1,9 @@
-import{cart,calculateCartQuantity} from '../../data/cart.js'
+import{cart,calculateCartQuantity, saveToStorage} from '../../data/cart.js'
 import {getProduct} from '../../data/products.js';
 import { getDeliveryOption } from '../../data/deliveryoptions.js';
 import {currencyFormat} from '../utils/money.js';
 import { addOrder } from '../../data/orders.js';
+import { renderOrderSummary } from './orderSummary.js';
 export function renderPaymentSummary()
 { 
   let productPriceCents=0;
@@ -71,10 +72,18 @@ export function renderPaymentSummary()
     });
      const order= await response.json();
      addOrder(order);
+     clearCart();
    }catch(error)
    {
       console.log('Unexpected Error: please try again later');
    }  
     window.location.href='orders.html';
    });
+}
+function clearCart()
+{
+  cart.length=0;
+  saveToStorage();
+  renderOrderSummary();
+  renderPaymentSummary();
 }

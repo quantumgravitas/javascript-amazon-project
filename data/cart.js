@@ -145,57 +145,61 @@ export function loadFromStorage()
 }
 
 loadFromStorage();
-// Save the cart to localStorage
-function saveToStorage() {
+
+export function saveToStorage()
+{
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-// Timeout manager for added to cart messages
-const addedMessageTimeouts = {};  // Declare this outside the function to preserve across calls
 
-// Add product to cart
-export function addToCart(productId) {
-  let matchingItem;
-  let quantity;
+const addedMessageTimeouts = {};
 
-  // Correcting the selector to handle class selection
-  const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
+
+export function addToCart(productId)
+{
+    let matchingItem;
+    let quantity;
   
-  if (quantitySelector !== null) {
-    quantity = Number(quantitySelector.value); // Read the quantity value
-    console.log(quantity);
-    const addedSelector = document.querySelector(`.js-added-to-cart-${productId}`);
-    if (addedSelector) {
-      addedSelector.classList.add("added-to-cart-visible");
+    const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
 
-      // Manage the timeout for hiding the "added to cart" message
-      let previousTimeOutId = addedMessageTimeouts[productId];
-      if (previousTimeOutId) {
-        clearTimeout(previousTimeOutId);  // Clear previous timeout if exists
+  if (quantitySelector !== null) 
+  {
+      quantity = Number(quantitySelector.value);
+
+      const addedSelector = document.querySelector(`.js-added-to-cart-${productId}`);
+
+      if(addedSelector)
+      {
+        addedSelector.classList.add("added-to-cart-visible");
+
+        let previousTimeOutId = addedMessageTimeouts[productId];
+        if (previousTimeOutId)
+        {
+          clearTimeout(previousTimeOutId);
+        }
+
+        let timeOutId = setTimeout(() => {
+          addedSelector.classList.remove("added-to-cart-visible");
+        }, 2000);
+
+        addedMessageTimeouts[productId] = timeOutId; 
       }
-
-      let timeOutId = setTimeout(() => {
-        addedSelector.classList.remove("added-to-cart-visible");
-      }, 2000);
-
-      addedMessageTimeouts[productId] = timeOutId;  // Store the new timeout ID
-    }
-  } else {
+  }else
+  {
     console.log("Input element is missing for productId:", productId);
+    quantity=1 ;
   }
 
-  // Update cart with the new or existing item
+  
   cart.forEach((item) => {
     if (productId === item.productId) {
       matchingItem = item;
     }
   });
 
-  // If the item already exists in the cart, update its quantity
   if (matchingItem) {
     matchingItem.quantity += quantity;
   } else {
-    // If the item doesn't exist, add it to the cart
     cart.push({
       productId: productId,
       quantity: quantity,
@@ -203,22 +207,23 @@ export function addToCart(productId) {
     });
   }
 
-  saveToStorage(); // Save the updated cart to localStorage
-}
-
-// Remove product from cart
-export function removeFromCart(productId) {
-  const newCart = cart.filter(cartItem => cartItem.productId !== productId);
-  cart = newCart; // Update cart with new filtered list
   saveToStorage();
 }
 
-// Calculate total quantity of items in the cart
+
+
+export function removeFromCart(productId) {
+  const newCart = cart.filter(cartItem => cartItem.productId !== productId);
+  cart = newCart; 
+  saveToStorage();
+}
+
+
 export function calculateCartQuantity() {
   return cart.reduce((total, cartItem) => total + cartItem.quantity, 0);
 }
 
-// Update the quantity of a specific product in the cart
+
 export function updateQuantity(productId, newQuantity) {
   cart.forEach((cartItem) => {
     if (cartItem.productId === productId) {
@@ -263,3 +268,4 @@ export async  function loadCartFetch(fun)
    console.log(message);
    fun();
 }
+
