@@ -2,17 +2,17 @@ import { getProduct, loadProductsFetch } from "../data/products.js";
 import { orders } from "../data/orders.js";
 import { currencyFormat } from "./utils/money.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import { addToCart,cart,saveToStorage } from "../data/cart.js";
+import { addToCart,calculateCartQuantity,cart,saveToStorage} from "../data/cart.js";
 async function loadPage()
-{
+{  
    await loadProductsFetch();
-
    let ordersHTML='';
    orders.forEach((order)=>{
      ordersHTML+=`
      <div class="order-container">
      
        <div class="order-header">
+       
          <div class="order-header-left-section">
            <div class="order-date">
              <div class="order-header-label">Order Placed:</div>
@@ -64,7 +64,7 @@ async function loadPage()
            </div>
   
            <div class="product-actions">
-             <a href="tracking.html?${order.id}&${productDetails.productId}">
+             <a href="tracking.html?orderId=${order.id}&productId=${productDetails.productId}">
                <button class="track-package-button button-secondary">
                  Track package
                </button>
@@ -87,17 +87,21 @@ async function loadPage()
             <span class="buy-again-message">Buy it again</span>
             `
       },1000);
+      document.querySelector('.js-cart-quantity').innerHTML=calculateCartQuantity();
     });
   });
  
 }
+ 
 loadPage();
-
-function formatDate(Date)
+export function formatDate(Date)
 {
-   const DateString=dayjs(Date).format('MMMM D');
-   return DateString ;
+  const DateString=dayjs(Date).format('MMMM D');
+  return DateString ;
 }
+
+ 
+
 
 
         

@@ -71,6 +71,7 @@ export function renderPaymentSummary()
         })
     });
      const order= await response.json();
+     console.log(order)
      addOrder(order);
      clearCart();
    }catch(error)
