@@ -209,6 +209,13 @@
   margin-top: 11px;
   margin-bottom: 15px;
 }
+.place-order-button:disabled{
+  background-color: #b0b0b0; 
+  color: #7d7d7d;  
+  cursor: not-allowed;  
+  opacity: 0.5;
+
+}
 .quantity-input
 {
   width:30px;

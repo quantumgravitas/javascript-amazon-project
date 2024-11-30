@@ -76,6 +76,13 @@ function renderProductsGrid(){
       })
 
     document.querySelector('.js-cart-quantity').innerHTML=calculateCartQuantity();
+
+    document.querySelector('.js-search-button').addEventListener('click',()=>{
+        
+       const search=document.querySelector('.js-search-bar').value ;
+       console.log(search);
+        window.location.href=`amazon.html?search=${search}`;
+    })
 }
 
 renderProductsGrid();
